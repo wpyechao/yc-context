@@ -1,0 +1,38 @@
+{
+  "name": "@dragon/page-context",
+  "version": "0.2.5",
+  "description": "react context for a single page to use",
+  "keywords": [
+    "react context"
+  ],
+  "main": "./lib/index.js",
+  "module": "./es/index.js",
+  "types": "./lib/index.d.ts",
+  "author": {
+    "name": "pingyechao",
+    "email": "pingyechao@induschain.com"
+  },
+  "scripts": {
+    "compile": "tsc --declarationDir lib && tsc --declarationDir es"
+  },
+  "files": [
+    "dist",
+    "lib",
+    "es",
+    "README.md",
+    "LICENSE",
+    "package.json"
+  ],
+  "dependencies": {
+    "lodash.get": "4.4.2",
+    "lodash.set": "4.3.2"
+  },
+  "engines": {
+    "node": ">=8.0.0"
+  },
+  "license": "MIT",
+  "devDependencies": {
+    "@types/react": "^16.9.49",
+    "react": "^16.13.1"
+  }
+}
