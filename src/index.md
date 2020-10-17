@@ -4,11 +4,11 @@ group:
   path: /context
 ---
 
-# page-context
+# yc-context
 
 ## 是什么？
 
-page-context 是一个基于 React Context 的 **页面级** 状态管理器（类似 Redux），用于解决多层组件嵌套传值的问题，同时又能完美支持使用 hook 处理 effects
+yc-context 是一个基于 React Context 的 **页面级** 状态管理器（类似 Redux），用于解决多层组件嵌套传值的问题，同时又能完美支持使用 hook 处理 effects
 
 咱不支持 class 语法
 
@@ -42,7 +42,7 @@ const useXxx = () => {};
 const [withProvider, useXxxContext] = createContext(useXxx);
 
 // 页面组件用withProvider包起来
-withProvider()(Page);
+withProvider(Page);
 
 // 在page的children中可以这么获取Context的值
 const { xxx } = useXxxContext();
@@ -50,7 +50,7 @@ const { xxx } = useXxxContext();
 
 ## 需要注意！
 
-- 为避免嵌套产生不可预知的 bug，**必须**在**Page**层使用
+- **尽量**在**Page**层使用
 - **不要盲目用** ，简单的功能还是用普通的 props 传值好了。
 
 ## API
@@ -61,20 +61,19 @@ const { xxx } = useXxxContext();
 
 ### withProvider
 
-| 参数               | 说明                                                           | 类型                                             | 参数                      |
-| ------------------ | -------------------------------------------------------------- | ------------------------------------------------ | ------------------------- |
-| withProvider       | 用于包裹 Page 的 React HOC                                     | (mapPropsToProvider) => WrappedComponent => Page | mapPropsToProvider 见下方 |
-| mapPropsToProvider | 可以把 Page props 里面的值如 match path 等传到 page-context 中 | (props) => object                                | Page 的 props             |
+| 参数               | 说明                    | 类型              | 参数            |
+| ------------------ | ------------ | ---------------- | ------ |
+| withProvider       | 用于包裹 Page 的 React HOC | (Page) => NewPage |  |
 
 ### contextHook
 
 | 参数        | 说明                                 | 类型                  |
 | ----------- | ------------------------------------ | --------------------- |
-| contextHook | 获取 context 的 hook                 | (selector) => context |
-| selector    | 自定义获取想要的值，默认获取全部的值 | (value) => newVal     |
+| contextHook | 获取 context 的 hook                 | () => context |
 
 ## Demo1:
 
+<code src="./demo/demo1.tsx" />
 
 ## Demo2
 

@@ -1,59 +1,47 @@
-import * as React from 'react';
+import * as React from 'react'
 import {
-  ContextHookTuple,
-  ContextHookWithProvider,
-  Selector,
-  Comparer,
-} from "./types";
+  TResult,
+  TWithProvider,
+  TContextHookFunction
+} from "./types"
 
-const DEFAULT_CONTEXT_VALUE = "_dcv_" as any;
+const DEFAULT_CONTEXT_VALUE = "_dcv_" as any
 
 // 根据传入的context返回useContext的方法
-function createUseContext<V>(context: React.Context<any>): any {
-  return (selector: Selector<V> = (s) => s) => {
-    const value = React.useContext(context);
-    return selector(value);
-  };
+function createUseContext<T>(context: React.Context<T>): TContextHookFunction<T> {
+  return () => {
+    const value = React.useContext<T>(context)
+    return value
+  }
 }
 
 // factory function
-function createContext<P, V>(
-  useValue: (props: P) => V
-): ContextHookTuple<P, V> {
-  const Context = React.createContext(DEFAULT_CONTEXT_VALUE as V);
+function createContext<V>(
+  useValue: () => V
+): TResult<V> {
+  const Context = React.createContext<V>(DEFAULT_CONTEXT_VALUE as V)
 
-  // 生产者
-  const Provider: React.FC<P> = (props) => {
-    const value = useValue(props);
+  const withProvider: TWithProvider = (Wrapped) => (props) => {
+    // 生产者
+    const Provider: React.FC = (props) => {
+      const value = useValue()
 
-    return <Context.Provider value={value}>{props.children}</Context.Provider>;
-  };
+      return <Context.Provider value={value}>{props.children}</Context.Provider>
+    }
 
-  const withProvider: ContextHookWithProvider<P> = (mapPropsToProvider) => (
-    Wrapped
-  ) => {
-    return class extends React.Component {
-      render() {
-        const { children, ...restProps } = this.props;
+    return (
+      <Provider>
+        <Wrapped {...props} />
+      </Provider>
+    )
+  }
 
-        const providerProps = (mapPropsToProvider &&
-          mapPropsToProvider(restProps)) as P;
-
-        return (
-          <Provider {...providerProps}>
-            <Wrapped {...restProps}>{children}</Wrapped>
-          </Provider>
-        );
-      }
-    };
-  };
-
-  const tuple: ContextHookTuple<P, V> = [
+  const tuple: TResult<V> = [
     withProvider,
     createUseContext<V>(Context),
-  ];
+  ]
 
-  return tuple;
+  return tuple
 }
 
-export default createContext;
+export default createContext
