@@ -1,7 +1,7 @@
 ---
 group:
-  title: PageContext
-  path: /page-context
+  title: context
+  path: /context
 ---
 
 # page-context
@@ -35,16 +35,16 @@ page-context 是一个基于 React Context 的 **页面级** 状态管理器（�
 ## 怎么用？
 
 ```javascript
-import createPageContext from '@dragon/page-context';
+import createContext from 'yc-context';
 
 const useXxx = () => {};
 
-const [withProvider, useXxxContext] = createPageContext(useXxx);
+const [withProvider, useXxxContext] = createContext(useXxx);
 
 // 页面组件用withProvider包起来
 withProvider()(Page);
 
-// 在page的children中可以这么获取pageContext的值
+// 在page的children中可以这么获取Context的值
 const { xxx } = useXxxContext();
 ```
 
@@ -57,7 +57,7 @@ const { xxx } = useXxxContext();
 
 | API               | 说明                       | 类型                                  | 参数          |
 | ----------------- | -------------------------- | ------------------------------------- | ------------- |
-| createPageContext | 创建一个 page-context 实例 | (hook) => [withProvider, contextHook] | 自定义的 hook |
+| createContext | 创建一个 context 实例 | (hook) => [withProvider, contextHook] | 自定义的 hook |
 
 ### withProvider
 
@@ -75,10 +75,8 @@ const { xxx } = useXxxContext();
 
 ## Demo1:
 
-<code src="./demo/demo1.jsx" />
 
 ## Demo2
 
 模拟多详情页
 
-<code src="./demo/demo2/index.jsx" />

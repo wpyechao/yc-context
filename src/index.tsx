@@ -1,4 +1,4 @@
-import React from "react";
+import * as React from 'react';
 import {
   ContextHookTuple,
   ContextHookWithProvider,
@@ -17,7 +17,7 @@ function createUseContext<V>(context: React.Context<any>): any {
 }
 
 // factory function
-function createPageContext<P, V>(
+function createContext<P, V>(
   useValue: (props: P) => V
 ): ContextHookTuple<P, V> {
   const Context = React.createContext(DEFAULT_CONTEXT_VALUE as V);
@@ -56,4 +56,4 @@ function createPageContext<P, V>(
   return tuple;
 }
 
-export default createPageContext;
+export default createContext;
