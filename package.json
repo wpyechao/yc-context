@@ -1,6 +1,6 @@
 {
   "name": "yc-context",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "react context for a single page to use",
   "keywords": [
     "react context"
