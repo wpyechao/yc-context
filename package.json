@@ -14,7 +14,7 @@
   },
   "scripts": {
     "start": "dumi dev",
-    "build": "father-build",
+    "build": "tsc && father-build",
     "compile": "tsc --declarationDir lib && tsc --declarationDir es"
   },
   "files": [

@@ -4,7 +4,4 @@ import * as React from "react";
  */
 export declare type TContextHookFunction<V> = () => V;
 export declare type TWithProvider = <P>(Wrapped: React.ComponentType<P>) => React.FC<P>;
-export declare type TResult<V> = [
-    TWithProvider,
-    TContextHookFunction<V>
-];
+export declare type TResult<V> = [TWithProvider, TContextHookFunction<V>];
